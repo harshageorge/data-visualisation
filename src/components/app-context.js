@@ -8,21 +8,7 @@ export const AppContextProvider = (props) => {
   const [chartData, setchartData] = useState([]);
 
 
-  const LogIn = () => {
-    // const APIToken = JSON.parse(localStorage.getItem("Token"));
-    // if (APIToken) {
-    //   setloggedIn(true);
-    // }
-  };
-
-  const LogOut = () => {
-    // localStorage.removeItem("Token");
-    // setloggedIn(false);
-  };
-
   const contextValue = {
-    LogIn,
-    LogOut,
     loggedIn,
     setloggedIn,
     getSelectedListId,

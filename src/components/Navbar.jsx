@@ -4,13 +4,19 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { AppContext } from "../components/app-context";
 import { useNavigate } from "react-router-dom";
-
+import { UserContext } from "./Auth-context";
 export default function Navbar() {
-  const { LogOut, setloggedIn } = useContext(AppContext);
+  const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
-
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -29,36 +35,23 @@ export default function Navbar() {
           >
             Home
           </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{
+              paddingRight: "20px",
+              fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            {user && user.email}
+          </Typography>
           <Button
             color="inherit"
             sx={{ fontWeight: 700, fontSize: 17 }}
             onClick={() => {
-              localStorage.removeItem('Token');
-              LogOut();
-              navigate("/");
-              //       setloggedIn(false);
-              //       navigate("/");
-              // let axiosConfig = {
-              //   headers: {
-              //     Accept: "application/json",
-              //     Authorization: `Bearer ${APIToken}`,
-              //   },
-              // };
-              // fetch(
-              //   `https://user.windcrane.com/manager/api/v1/logout`,
-              //   axiosConfig
-              // )
-              //   .then((response) => response.json())
-              //   .then((resData) => {
-              //     if (resData.response.status_code == 200) {
-              //       LogOut();
-              //       setloggedIn(false);
-              //       navigate("/");
-              //     }
-              //   })
-              //   .catch((err) => {
-              //     console.log(err.message);
-              //   });
+              handleLogout();
             }}
           >
             Log out

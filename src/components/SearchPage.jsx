@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import {UserContext} from './Auth-context';
 
 import {
   TextField,
@@ -42,18 +43,11 @@ function SearchPage() {
 
   const { getSelectedListId, sethistoricalData, setchartData } =
     useContext(AppContext);
+    const {user} =useContext(UserContext);
   const [sortValue, setsortValue] = React.useState("");
   const navigate = useNavigate();
   useEffect(() => {
     const fetchPosts = () => {
-      // let APIToken = JSON.parse(localStorage.getItem("Token"));
-
-      // let axiosConfig = {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: "Bearer " + APIToken,
-      //   },
-      // };
       axios
         .get(
           "https://jsonplaceholder.typicode.com/users"
@@ -236,7 +230,7 @@ function SearchPage() {
               borderRadius: "15px",
             }}
           >
-            Get Data
+            Get Data 
           </Button>
         </Box>
         <Grid container spacing={3}>

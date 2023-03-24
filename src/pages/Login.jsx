@@ -1,29 +1,25 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
-import { Grid, Paper, TextField, Button } from "@mui/material";
-import { AppContext } from "../components/app-context";
+import { Grid, Paper, TextField, Button, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { UserContext } from "../components/Auth-context";
 
 const Login = () => {
-  const [values, setvalues] = useState({
-    username: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, seterrorMessage] = useState("");
-  const { LogIn, setloggedIn } = useContext(AppContext);
+  const { signIn } = useContext(UserContext);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const APIToken = JSON.parse(localStorage.getItem("Token"));
-  //   if (APIToken) {
-  //     setloggedIn(true);
-  //     navigate("/home");
-  //   }
-  // }, []);
-  const handleSubmit = (e) => {
-  
-    // LogIn();
-    navigate("/home");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      seterrorMessage("");
+      await signIn(email, password);
+      navigate("/home");
+    } catch (e) {
+      seterrorMessage("invalid username/password");
+      console.log(e.message);
+    }
   };
   const paperStyle = { padding: 15, minheight: "60vh" };
   const btnstyle = { margin: "20px 0" };
@@ -35,17 +31,23 @@ const Login = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh", padding: 10 }}
+      style={{ minHeight: "100vh", padding: 20 }}
     >
       <Paper elevation={10} style={paperStyle}>
         <form onSubmit={handleSubmit}>
           <Grid align="center">
             <h2>Log In</h2>
           </Grid>
+          {errorMessage && (
+            <Alert variant="standard" color="error">
+              {errorMessage}{" "}
+            </Alert>
+          )}
+
           <TextField
             label="Username"
             type="text"
-            onChange={(e) => setvalues({ ...values, username: e.target.value })}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter username"
             variant="outlined"
             margin="normal"
@@ -55,7 +57,7 @@ const Login = () => {
           <br></br>
           <TextField
             label="Password"
-            onChange={(e) => setvalues({ ...values, password: e.target.value })}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             type="password"
             variant="outlined"
@@ -63,7 +65,7 @@ const Login = () => {
             fullWidth
             required
           />
-          {errorMessage ? errorMessage : ""}
+
           <Button
             type="submit"
             color="primary"
@@ -73,7 +75,10 @@ const Login = () => {
           >
             Log in
           </Button>
-        {/* <p>Don't have an account yet? <Link to='/signup'>Sign up</Link> </p>   */}
+
+          <p>
+            Don't have an account yet? <Link to="/signup">Sign up</Link>{" "}
+          </p>
         </form>
       </Paper>
     </Grid>
