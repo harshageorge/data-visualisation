@@ -47,7 +47,7 @@ export default function Navbar() {
           >
             {user && user.email}
           </Typography>
-          <Button
+          {/* <Button
             color="inherit"
             sx={{ fontWeight: 700, fontSize: 17 }}
             onClick={() => {
@@ -55,7 +55,22 @@ export default function Navbar() {
             }}
           >
             Log out
-          </Button>
+          </Button> */}
+              <Typography
+            variant="h6"
+            noWrap
+            onClick={() => {
+              handleLogout();
+            }}
+            sx={{
+            fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+              cursor:'pointer'
+            }}
+          >
+           Log Out
+          </Typography>
         </Toolbar>
       </AppBar>
     </Box>

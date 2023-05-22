@@ -174,7 +174,7 @@ function SearchPage() {
     return selectedData;
   };
   return (
-    <Container maxWidth="lg" sx={{ padding: "10px" }}>
+    <Container maxWidth="lg" sx={{ padding: "10px",marginTop:'20px' }}>
       <Box sx={{ display: "flex", flexDirection: "column", padding: "5px" }}>
         <TextField
           label="Search"
@@ -193,7 +193,9 @@ function SearchPage() {
           sx={{
             display: "flex",
             flexDirection: "row",
+            justifyContent:'space-between',
             gap: "5px",
+            width: "90%",
             marginTop: "20px",
           }}
         >
@@ -217,17 +219,16 @@ function SearchPage() {
           </Box>
           <Button
             variant="contained"
-            size="small"
+            size='small'
             disabled={getSelectedListId.length === 0}
             onClick={() => getHistoricData()}
             style={{
-              margin: "auto",
-              minWidth: "100px",
+            
               paddingLeft: "10px",
               paddingRight: "10px",
               paddingTop: "5px",
               paddingBottom: "5px",
-              borderRadius: "15px",
+              borderRadius: "13px",
             }}
           >
             Get Data 
@@ -244,7 +245,7 @@ function SearchPage() {
                     color="primary"
                   ></Typography>
                 </ListItemText>
-                <ListItemText style={{ flex: "2 1 0" }}>
+                <ListItemText style={{ flex: "3 1 0" }}>
                   <Typography
                     style={{ fontWeight: 600 }}
                     variant="subtitle2"
@@ -269,7 +270,7 @@ function SearchPage() {
                 </ListItemText>
                 <ListItemText
                   style={{
-                    flex: "2 1 0",
+                    flex: "3 1 0",
                   }}
                 >
                   <Typography
@@ -283,7 +284,7 @@ function SearchPage() {
                 </ListItemText>
                 <ListItemText
                   style={{
-                    flex: "1 1 0",
+                    flex: "2 1 0",
                   }}
                 >
                   <Typography

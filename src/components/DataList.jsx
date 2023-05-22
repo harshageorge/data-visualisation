@@ -41,7 +41,7 @@ const DataList = ({ tasks, loading }) => {
             style={{ background: "#ffffff", marginBottom: "10px" }}
           >
             <ListItemButton
-              style={{ marginTop: "15px", display: "flex", columnGap: "7px" }}
+              style={{ marginTop: "15px", display: "flex"}}
               key={index}
               onClick={handleToggle(task.id)}
               dense
@@ -55,7 +55,7 @@ const DataList = ({ tasks, loading }) => {
                   inputProps={{ "aria-labelledby": task.id }}
                 />
               </ListItemIcon>
-              <ListItemText style={{ flex: "2 1 0", wordBreak: "break-all" }}>
+              <ListItemText style={{ flex: "3 1 0", wordBreak: "break-all" }}>
                 {task.name}
               </ListItemText>
               <ListItemText
@@ -69,7 +69,7 @@ const DataList = ({ tasks, loading }) => {
               <ListItemText
                 style={{
                   wordBreak: "break-all",
-                  flex: "2 1 0",
+                  flex: "3 1 0",
                 }}
               >
                 {task.email}
@@ -77,7 +77,7 @@ const DataList = ({ tasks, loading }) => {
               <ListItemText
                 style={{
                   wordBreak: "break-all",
-                  flex: "1 1 0",
+                  flex: "2 1 0",
                 }}
               >
                 {task.website}
